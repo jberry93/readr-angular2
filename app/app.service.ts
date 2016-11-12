@@ -1,40 +1,26 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import {Config} from './app.constants';
-import {Article} from './article';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import {Articles} from './articles';
 
 @Injectable()
 export class ReadrService {
-  private actionUrl: string;
-  private headers: Headers;
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private ApiKey = 'apiKey=bc525e6cdfa443e4b6b1e0d17790f4a3';
+  private ApiUrl = 'https://newsapi.org/v1/articles?';
+  private HackerNewsUrl = this.ApiUrl + 'source=hacker-news&' + this.ApiKey;
 
-  constructor(private _http: Http, private _config: Config) {
-    this.actionUrl = _config.HackerNewsUrl;
-    this.headers = new Headers();
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Accept', 'application/json');
+  constructor(private http: Http){}
+
+  private handleError(error: any): Promise<any> {
+    console.error('Uh Oh!', error);
+    return Promise.reject(error.message || error);
   }
 
-  private extractData(response: Response) {
-    let body = response.json();
-    return body.data || {};
-  }
-
-  private handleError(error: Response | any) {
-    let errorMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errorMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errorMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errorMsg);
-    return Observable.throw(errorMsg);
-  }
-
-  getHackerArticles(): Observable<Article[]> {
-    return this._http.get(this.actionUrl).map(this.extractData).catch(this.handleError);
+  getHackerArticles(): Promise<Articles[]> {
+    return this.http.get(this.HackerNewsUrl)
+                    .toPromise()
+                    .then(response => response.json().data as Articles[])
+                    .catch(this.handleError);
   }
 }
