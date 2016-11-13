@@ -1,6 +1,9 @@
 <div class="articlesContainer">
-  <ul class="articleList">
-    <li class="articleContainer"><h2>Hacker Articles</h2></li>
-    <li class="articleContainer" *ngFor="let article of articles"><a href="{{ article.url }}">{{ article.title }}</a></li>
-  </ul>
+  <h2>Hacker News Articles</h2>
+  <md-card *ngFor="let article of articles">
+    <md-card-title-group>
+      <md-card-title><a href="{{ article.url }}">{{ article.title }}</a></md-card-title>
+      <md-card-subtitle>{{ article.description }}</md-card-subtitle>
+    </md-card-title-group>
+  </md-card>
 </div>
