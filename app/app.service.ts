@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 export class ReadrService{
   constructor(private http: Http){}
 
-  private ApiKey = 'apiKey=bc525e6cdfa443e4b6b1e0d17790f4a3';
+  private ApiKey = 'apiKey=<insert API key here!>';
   private ApiUrl = 'https://newsapi.org/v1/articles?';
   private HackerNewsUrl = this.ApiUrl + 'source=hacker-news&' + this.ApiKey;
 
