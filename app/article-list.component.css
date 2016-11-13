@@ -1,0 +1,8 @@
+.articleList {
+  font-family: monospace;
+  list-style-type: none;
+  padding-left: 0;
+}
+.articleContainer {
+  padding: 0.2rem;
+}
