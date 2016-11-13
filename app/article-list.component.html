@@ -1,6 +1,6 @@
-<h2>Hacker Articles</h2>
-<div>
-  <ul>
-    <li *ngFor="let article of Articles.articles">{{ article }}</li>
+<div class="articlesContainer">
+  <ul class="articleList">
+    <li class="articleContainer"><h2>Hacker Articles</h2></li>
+    <li class="articleContainer" *ngFor="let article of articles"><a href="{{ article.url }}">{{ article.title }}</a></li>
   </ul>
 </div>

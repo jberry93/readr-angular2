@@ -5,11 +5,8 @@ import {ReadrService} from './app.service';
 
 @Component({
   selector: 'article-list',
-  template: `
-    <ul>
-      <li *ngFor="let article of articles"><a href="{{ article.url }}">{{ article.title }}</a></li>
-    </ul>
-  `
+  templateUrl: 'app/article-list.component.html',
+  styleUrls: ['app/article-list.component.css']
 })
 
 export class ArticleList implements OnInit {
