@@ -4,7 +4,7 @@ import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {AppComponent} from './app.component';
 import {ReadrService} from './app.service';
-import {ArticleList} from './article-list.component';
+import {ArticleList} from './article-list/article-list.component';
 
 @NgModule({
   imports: [BrowserModule, HttpModule, MaterialModule.forRoot()],

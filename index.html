@@ -13,10 +13,7 @@
     <script src="./node_modules/systemjs/dist/system.src.js"></script>
     <script src="./systemjs.config.js"></script>
     <script>
-      window.addEventListener('load', function(e) {
-        System.import('app').catch(function(error){ console.error(error); });
-        console.info('All resources finished loading!')
-      })
+      System.import('app').catch(function(error){console.error(error)});
     </script>
   </body>
 </html>
