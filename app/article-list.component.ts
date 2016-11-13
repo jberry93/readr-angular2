@@ -1,26 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {Articles} from './articles';
-import 'rxjs/add/operator/toPromise';
 import {ReadrService} from './app.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'article-list',
-  templateUrl: 'article-list.component.html',
-  styleUrls: ['article-list.component.css']
+  template: `
+    <ul>
+      <li *ngFor="let article of articles"><a href="{{ article.url }}">{{ article.title }}</a></li>
+    </ul>
+  `
 })
 
 export class ArticleList implements OnInit {
-  articles: Articles[];
-
   constructor(private readrService: ReadrService){}
 
-  getArticles(): void {
+  private articles: Articles[]
+
+  getArticles(){
     this.readrService.getHackerArticles()
-                     .then(articles => this.articles = articles);
+                     .subscribe(
+                       Articles => {
+                         this.articles = Articles.articles;
+                       }
+                     );
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.getArticles();
   }
 }
